@@ -1,12 +1,3 @@
-/*
-Dáriel Eduardo Villatoro Rodas
-Carné: 20776
-
-POO - 2020
-Sección: 21
-Segunda Entrega del Proyecto
-*/
-
 //Clase controlador
 
 import java.util.Scanner;
@@ -14,12 +5,14 @@ import java.util.Scanner;
 public class Controlador {
 
     private Vista vista;
-    private InicioSesion inicioSesion;
+    private inicioSesion inSesion;
+    private int continuar = 1;
 
     Scanner scan = new Scanner (System.in);
     
     public Controlador () {
         vista = new Vista();
+        inSesion = new inicioSesion();
         //Aqui se instancian las clases
     }
 
@@ -40,7 +33,7 @@ public class Controlador {
     private void ejecucionComando (int i) {
         switch (i) {
             case 1:
-                inicioSesion.Arranque();
+                inSesion.Arranque();
                 // nuevoUsuario(); //Se crea el usuario
                 // registroUsuario();//Se pide el usuario
                 // registroContrasena();//Se pide la password
@@ -48,6 +41,7 @@ public class Controlador {
                 break;
             case 2:
                 //Muestra menu de Invitado
+          
             case 3:
                 break;
             default:
@@ -99,16 +93,28 @@ public class Controlador {
     private void menuUsuario (int i) {
         switch (i) {
             case 1:
-                //Se deben obtener datos de los cursos para imprimirlos
+                Pensum pensum = new Pensum();
+                pensum.mostrarPensum();
                 break;
             case 2:
                 //Se deben obtener datos de las donaciones para imprimirlos
+                vista.imprimir(":: DONACIONES :: ");
+                Donaciones2 donaciones= new Donaciones2();
+                donaciones.donar();
                 break;
             case 3:
                 //Se deben obtener datos de noticias para imprimirlos
+                vista.imprimir(":: NOTICIAS :: ");
+                Noticia noticia = new Noticia();
+                vista.imprimir(noticia.getNoticia());
                 break;
             case 4:
                 //Aqui se ejecuta el minijuego
+                /*
+                  vista.imprimir(":: JUEGO 1 - CUESTIONARIO RANDOM :: ");
+                  Minijuego minijuego = new Minijuego();
+                  minijuego.cuestionario();*/
+                menuJuegos();
                 break;
             case 5:
                 //No disponible
@@ -140,4 +146,40 @@ public class Controlador {
         }
         
     }
+    
+    //Menu para los cursos de matemáticas
+    public void menuCursos(){
+		int op = 0;
+		while(op != 3){
+			op = vista.menu();
+			if (op == 1){
+				for(int i = 0; i < continuar; i++){
+					vista.Bienvenida();
+					vista.getVinculo();
+					vista.getComentario();
+				}
+			} else if (op == 2){
+        vista.claseMateF();
+			}else {
+				vista.salir();
+			}
+		}
+	}
+
+  public void menuJuegos(){
+    int opc = 0;
+    while(opc != 3){
+      opc = vista.menuJuego();
+      if (opc == 1){
+        vista.imprimir(":: JUEGO 1 - CUESTIONARIO RANDOM :: ");
+        Minijuego minijuego = new Minijuego();
+        minijuego.cuestionario();
+      }else if(opc == 2){
+        Mate m = new Mate();
+        m.nivel_facil();
+      }else {
+        vista.salir();
+      }
+    }
+  }
 }
