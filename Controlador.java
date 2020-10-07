@@ -99,7 +99,7 @@ public class Controlador {
             case 2:
                 //Se deben obtener datos de las donaciones para imprimirlos
                 vista.imprimir(":: DONACIONES :: ");
-                Donaciones2 donaciones= new Donaciones2();
+                Donaciones donaciones= new Donaciones();
                 donaciones.donar();
                 break;
             case 3:
